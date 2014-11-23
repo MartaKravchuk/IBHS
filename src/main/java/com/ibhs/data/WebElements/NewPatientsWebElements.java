@@ -16,6 +16,8 @@ public class NewPatientsWebElements extends BaseClass {
 		this.driver = driver;
 	}
 	
+	@FindBy(xpath = Locators.NewPatientPage.FormPatient.TabSecondaryInsurance.SECONDARY_TAB) public static WebElement tabSecondaryInsurance;
+	
 	@FindBy(xpath = Locators.NewPatientPage.FormPatient.FIRST_NAME_ERROR) public static WebElement errorFirstName_FP;
 	@FindBy(xpath = Locators.NewPatientPage.FormPatient.LAST_NAME_ERROR) public static WebElement errorLastName_FP;
 	@FindBy(xpath = Locators.NewPatientPage.FormPatient.GENDER_ERROR) public static WebElement errorGender_FP;
@@ -40,7 +42,22 @@ public class NewPatientsWebElements extends BaseClass {
 	@FindBy(xpath = Locators.NewPatientPage.FormPatient.STATE_INPUT) public static WebElement fieldState_FP;
 	@FindBy(xpath = Locators.NewPatientPage.FormPatient.ZIP_INPUT) public static WebElement fieldZip_FP;
 	
+	@FindBy(xpath = Locators.NewPatientPage.FormPatient.TabPrimaryInsurance.FormInsurance.INSURANCE_COMPANY_SELECT) 
+	public static WebElement buttonInsuranceCompany_PI;
+	@FindBy(xpath = Locators.NewPatientPage.FormPatient.TabPrimaryInsurance.FormInsurance.POLICY_TYPE_SELECT) 
+	public static WebElement buttonPolicyType_PI;
+	@FindBy(xpath = Locators.NewPatientPage.FormPatient.TabPrimaryInsurance.FormInsurance.MEMBER_ID_INPUT) 
+	public static WebElement fieldMemberID_PI;
 	
-	//@FindBy(xpath = Locators.NewPatientPage.FormPatient.CalendarDOB.TODAY_BUTTON) public static WebElement buttonTodayDOB_FP;
+	@FindBy(xpath = Locators.NewPatientPage.FormPatient.TabPrimaryInsurance.FormPolicyHolder.PATIENTS_RELATIONSHIP_TO_INSURED_SELECT) 
+	public static WebElement buttonPatientsRelationshipToInsured_PH;
+	
+	
+	@FindBy(xpath = Locators.NewPatientPage.FormPatient.TabPrimaryInsurance.FormPolicyHolder.FIRST_NAME_INPUT) public static WebElement fieldFirstName_PH;
+	
+	
+	
+	
+
 
 }

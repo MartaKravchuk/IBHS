@@ -111,14 +111,18 @@ public class TestNewPatients extends BaseClass {
 		softAssert.assertEquals(actualStateError, expectedStateError);	
 		if (!actualStateError.equals(expectedStateError)) System.out.println("not matching");
 		else System.out.println("Error Message : " + getText(NewPatientsWebElements.errorState_FP) + " - has correct statement");
-		
+
+//more than one errors		
 		String actualZIPErrors = PageFactory.initElements(driver, BillingPage.class).moveToPatientPage().ctreateNewPatient()
 			.clickAction(driver.findElement(By.xpath(Locators.Unique.SAVE_BUTTON)))
-			.getMoreThanOneRowOfText(NewPatientsWebElements.error_S_ZIP_FP, 1);
+			.getMoreThanOneRowOfText(NewPatientsWebElements.error_S_ZIP_FP, 2);
 		softAssert.assertEquals(actualZIPErrors, expectedZIPError);	
 		if (!actualZIPErrors.equals(expectedZIPError)) System.out.println("not matching");
 		else System.out.println("Error Message : " + getMoreThanOneRowOfText(NewPatientsWebElements.error_S_ZIP_FP, 1) + " - has correct statement");
+		
+		//softAssert.assertAll();	
 	}
+	
 
 //not ready add javascript
 	@Test(priority = 3) 
@@ -169,18 +173,28 @@ public class TestNewPatients extends BaseClass {
 		PageFactory.initElements(driver, BillingPage.class).moveToPatientPage().ctreateNewPatient()
 			.selectFullDateFromCalendarPicker(NewPatientsWebElements.buttonDOB_FP, "2012", "November", "08")
 			.activateTappingText(NewPatientsWebElements.fieldDOB_FP).scrollup();
+		softAssert.assertFalse(isElementPresent(NewPatientsWebElements.errorDOB_FP));
+		//if (true) System.out.println("The numbers are introduced by VALID values");	
+		
 		PageFactory.initElements(driver, BillingPage.class).moveToPatientPage().ctreateNewPatient()
 			.selectMonthAndDayFromCalendarPicker(NewPatientsWebElements.buttonDOB_FP, "May", "03")
 			.activateTappingText(NewPatientsWebElements.fieldDOB_FP).scrollup();
+		softAssert.assertFalse(isElementPresent(NewPatientsWebElements.errorDOB_FP));
+		//if (true) System.out.println("The numbers are introduced by VALID values");	
+		
 		PageFactory.initElements(driver, BillingPage.class).moveToPatientPage().ctreateNewPatient()
 			.selectOnlyDayFromCalendarPicker(NewPatientsWebElements.buttonDOB_FP, "11")
 			.activateTappingText(NewPatientsWebElements.fieldDOB_FP).scrollup();
+		softAssert.assertFalse(isElementPresent(NewPatientsWebElements.errorDOB_FP));
+		//if (true) System.out.println("The numbers are introduced by VALID values");	
+		
 		PageFactory.initElements(driver, BillingPage.class).moveToPatientPage().ctreateNewPatient()
 			.selectTodayFromCalendarPickerViaButton(NewPatientsWebElements.buttonDOB_FP)
 			.activateTappingText(NewPatientsWebElements.fieldDOB_FP).scrollup();
-		softAssert.assertAll();	
 		softAssert.assertFalse(isElementPresent(NewPatientsWebElements.errorDOB_FP));
-		if (true) System.out.println("The numbers are introduced by valid values");	
+		//if (true) System.out.println("The numbers are introduced by VALID values");	
+		softAssert.assertAll();	
+		if (true) System.out.println("The numbers are introduced by VALID values");	
 	}
 		
 //+ 
@@ -188,31 +202,33 @@ public class TestNewPatients extends BaseClass {
 	public void verifySSNErrorRequired_Test_1_7(){
 		SoftAssert softAssert = new SoftAssert();
 		PageFactory.initElements(driver, BillingPage.class).moveToPatientPage().ctreateNewPatient()
-		.inputText(NewPatientsWebElements.fieldSSN_FP, "000124555")
+		.inputText(NewPatientsWebElements.fieldSSN_FP, "000123456")
 		.activateTappingText(NewPatientsWebElements.fieldSSN_FP);
+		softAssert.assertTrue(isElementPresent(NewPatientsWebElements.errorSSN_FP));
+		
 		PageFactory.initElements(driver, BillingPage.class).moveToPatientPage().ctreateNewPatient()
 		.inputText(NewPatientsWebElements.fieldSSN_FP, "12345678")
 		.activateTappingText(NewPatientsWebElements.fieldSSN_FP);
-		softAssert.assertAll();	
 		softAssert.assertTrue(isElementPresent(NewPatientsWebElements.errorSSN_FP));
-		if (true) System.out.println("kk");			
+		
+		softAssert.assertAll();	
+		if (true) System.out.println("The numbers are introduced by INVALID values");
 	}
-	
-	@Test(priority = 5)
+//+	
+	@Test(priority = 8)
 	public void verifySSNWithValidNumbers_Test_1_8(){
 		PageFactory.initElements(driver, BillingPage.class).moveToPatientPage().ctreateNewPatient()
-		.inputText(By.xpath(Locators.NewPatientPage.FormPatient.SSN_INPUT), "999999999")
-		.activateTappingText(By.xpath(Locators.NewPatientPage.FormPatient.SSN_INPUT));
-		Assert.assertFalse(isElementPresent(By.xpath(Locators.NewPatientPage.FormPatient.SSN_ERROR)));
-		if (true) System.out.println("good");	
+		.inputText(NewPatientsWebElements.fieldSSN_FP, "123456789")
+		.activateTappingText(NewPatientsWebElements.fieldSSN_FP);
+		Assert.assertFalse(isElementPresent(NewPatientsWebElements.errorSSN_FP));
+		if (true) System.out.println("The numbers are introduced by VALID values");	
 	}
 
 	
 	@Test(priority = 9)
 	public void verify() throws Exception{
 		PageFactory.initElements(driver, BillingPage.class).moveToPatientPage().ctreateNewPatient()
-		.fillFormPatientOnlyWithImportantData()
-		.scrollup()
+		.fillNewPatientsPageOnlyWithImportantData().scrollup()
 		.clickAction(driver.findElement(By.xpath(Locators.Unique.SAVE_BUTTON)));
 		
 		//.retryingFindClick(By.xpath(Locators.Unique.SAVE_BUTTON));

@@ -6,7 +6,7 @@
       <class name="com.ibhs.test.user.TestNewPatients">
         <methods>
           <include name="tearDown"/>
-          <include name="verifySSNErrorRequired_Test_1_7"/>
+          <include name="verify"/>
           <include name="setUp"/>
         </methods>
       </class> <!-- com.ibhs.test.user.TestNewPatients -->

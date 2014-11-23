@@ -106,7 +106,7 @@ public class BaseClass {
 			testList.put(i, item.getText());		
 			i++;		
 		}		
-		System.out.println(testList);
+		System.out.println(testList.get(q));
 		return testList.get(q);			
 	}	
 		
@@ -242,7 +242,11 @@ public class BaseClass {
 	public  BaseClass dropDownSelectValueWithSearch(WebElement buttonForSelect, String value) {
 		try {
 			buttonForSelect.click();
+			try {
 			inputText(driver.findElement(By.xpath(Locators.Unique.SEARCH)), value);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				}
 			for(WebElement container : driver.findElements(By.xpath(Locators.Unique.LIST_CONTAINER))){			
 				if(container.getText().contains(value)){
 					container.click();
@@ -251,7 +255,6 @@ public class BaseClass {
 			}			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-
 		}
 		return this;
 	}
@@ -331,6 +334,8 @@ public class BaseClass {
 		jse.executeScript("scroll(250, 0)"); // this will scroll up
 		return this;		
 	}
+	
+	
 	
 	/* jse.executeScript("scroll(0, 250)"); // this will scroll down
 	2.Element is not present at the time of execution. Use WebDriverWait to until the element is present.

@@ -10,7 +10,7 @@ public class Locators {
 		public static final String CALENDAR_CELLS_YEAR_MONTH_DAY = ".//td[contains(@class,'text-center date-picker-day ng-scope')]/button";
 		public static final String TODAY_BUTTON = ".//button[contains(text(), 'Today')]";
 		public static final String LIST_CONTAINER = ".//div[@class='checkBoxContainer']//div";
-		public static final String SEARCH = ".//input[@placeholder='Search...']";
+		public static final String SEARCH = ".//input[contains(@placeholder, 'Search')]";
 		
 	}
 		
